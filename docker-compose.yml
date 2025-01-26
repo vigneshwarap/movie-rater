@@ -13,9 +13,15 @@ services:
       - ./backend/db/init.js:/docker-entrypoint-initdb.d/init.js:ro
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   backend:
-    build: 
+    build:
       context: ./backend
       dockerfile: dockerfile
     container_name: backend-container
@@ -25,6 +31,8 @@ services:
       - '3000:3000'
     networks:
       - app-network
+    depends_on:
+      - mongo
 
 networks:
   app-network:
