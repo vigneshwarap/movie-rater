@@ -18,9 +18,32 @@ export const getMovie = async (id) => {
 
 export const createMovie = async(movieData) => {
   try {
-    const newMovie = movie.create(movieData)
+    const newMovie = await movie.create(movieData)
     return newMovie;
   } catch (err) {
     throw new Error(`Error creating movie ${err.message}`)
+  }
+}
+
+export const deleteMovie = async(id) => {
+  try {
+    const deletedMovie = await movie.findByIdAndDelete(id);
+    return deletedMovie;
+  } catch (err) {
+    throw new Error(`Error while deleting movie ${err.message}`)
+  }
+}
+
+
+export const updateMovie = async(id, updateMovie) => {
+  try {
+    const updatedMovie = await movie.findByIdAndUpdate(
+      id,
+      { $set: updateMovie},
+      {new : true}
+    )
+    return updatedMovie;
+  } catch (err) {
+    throw new Error(`Error while updating movie ${err.message}`)
   }
 }
