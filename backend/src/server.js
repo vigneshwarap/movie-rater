@@ -9,6 +9,9 @@ await connectDB();
 const app = express();
 const port = process.env.PORT || 5000
 
+// Middleware to parse JSON requests
+app.use(express.json());
+
 //Routes
 app.use("/movies", movieRoute)
 
