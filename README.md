@@ -15,3 +15,22 @@ A movie rating application built using Node.js, Express, and MongoDB. Users can 
   ```bash
   git clone https://github.com/vigneshwarap/movie-rater.git
   ```
+
+2. Build the docker images
+
+  ```bash
+  docker-compose build
+  ```
+
+3. Start the containers
+
+  ```bash
+  docker-compose up
+  ```
+
+4. Verify if the container are up and running by sending a http request http://localhost:3000/movies
+
+5. To stop containers
+  ```bash
+  docker-compose down
+  ```
