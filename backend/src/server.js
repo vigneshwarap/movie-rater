@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 dotenv.config()
 import movieRoute from "./routes/movieRoute.js"
+import userRoute from "./routes/userRoute.js"
 import connectDB from "./db.js"
 
 await connectDB();
@@ -14,7 +15,7 @@ app.use(express.json());
 
 //Routes
 app.use("/movies", movieRoute)
-
+app.use("/users", userRoute)
 
 // Global Error-Handling Middleware
 app.use((err, req, res, next) => {

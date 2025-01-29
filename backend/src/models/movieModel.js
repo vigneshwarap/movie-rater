@@ -18,7 +18,7 @@ const movieSchema = new mongoose.Schema({
     type : [String],
     required : [true, "At least one genre is required"],
     validate : {
-      validator : function (genre) {
+      validator : function (genre) {  
         return genre.length > 0 // Ensure array is not empty
       },
       message : "At least one genre must be present"

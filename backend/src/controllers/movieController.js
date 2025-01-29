@@ -33,7 +33,7 @@ export const deleteMovie = async (req, res, next) => {
     if (!movie) {
       throw new Error(`The movie with id : ${id} doesn't exist`)
     }
-    const deletedMovie = await movieService.deleteMovie(req.params.id)
+    await movieService.deleteMovie(req.params.id)
     res.status(200).send()
   } catch (err) {
     next(err)
