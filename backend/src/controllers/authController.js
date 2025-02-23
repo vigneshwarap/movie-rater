@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import user from '../models/userModel.js';
+import User from '../models/userModel.js';
 import * as userService from "../services/userService.js";
 
 
@@ -21,7 +21,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
     try {
         const { username, password} = req.body;
-        const userInDb = await user.findOne({username})
+        const userInDb = await User.findOne({username})
         if (!userInDb) {
             return res.status(404).json({message : `Invalid credentials`})
         }
@@ -33,7 +33,8 @@ export const login = async (req, res, next) => {
         }
 
         // Token generation
-        const token = jwt.sign({id : user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn:"1h"})
+        const token = jwt.sign({id : userInDb._id, role: userInDb.role}, process.env.JWT_SECRET, {expiresIn:"1h"})
+        console.log("Token "+ token)
 
         res.status(200).json({token})
     } catch (err) {
