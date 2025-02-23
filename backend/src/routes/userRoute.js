@@ -1,8 +1,10 @@
 import express from "express"
+import verifyToken from "../middlewares/authMiddleware.js";
 const router = express.Router()
 import * as userController from '../controllers/userController.js'
+import authorizeRoles from "../middlewares/roleMiddleware.js";
 
-router.get("/", userController.getAllUsers);
+router.get("/", verifyToken, authorizeRoles("admin"), userController.getAllUsers);
 
 router.get("/:id", userController.getUser);
 
